@@ -9,13 +9,14 @@ import com.example.TeleMediaX.services.UserService;
 import com.example.TeleMediaX.utility.JWTUtility;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -25,8 +26,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Locale;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
 public class UserResource {
@@ -45,10 +45,8 @@ public class UserResource {
     @Autowired
     JWTUtility jwtUtility;
 
-   // @Autowired
-    @Qualifier("User")
-    private UserDetails userDetails;
-
+    //@Autowired
+    UserDetails userDetails;
 
     @GetMapping("/users")
     public List<User> retrieveAllUsers(){
@@ -90,7 +88,6 @@ public class UserResource {
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception{
-      /*  System.out.println("authenticationRequest :: " + authenticationRequest.getPassword() + " " + authenticationRequest.getUserName());
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUserName(), authenticationRequest.getPassword()));
         } catch (BadCredentialsException e){
@@ -98,11 +95,9 @@ public class UserResource {
         }
         userService.loadUserByUsername(authenticationRequest.getUserName());
 
-        System.out.println("user2 detail :: " + new Gson().toJson(userDetails));
-        System.out.println("user1 detail :: " + new Gson().toJson(authenticationRequest.getUserName()));*/
-        final String jwt = jwtUtility.generateToken("Ebenezer");
-        System.out.println("user3 detail :: " + new Gson().toJson(authenticationRequest.getUserName()));
-        System.out.println("jwt::"+ new Gson().toJson(new AuthenticationResponse(jwt)));
+        System.out.println("user detail :: " + new Gson().toJson(userDetails));
+
+        final String jwt = jwtUtility.generateToken(userDetails);
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
