@@ -21,6 +21,7 @@ public class JWTUtility implements Serializable {
 
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 
+    
     @Value("${jwt.header}")
     private String secretKey;
 
@@ -51,9 +52,9 @@ public class JWTUtility implements Serializable {
     }
 
     //generate Token for users
-    public String generateToken(UserDetails userDetails){
+    public String generateToken(String UserName){
         Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, userDetails.getUsername());
+        return doGenerateToken(claims, UserName);
     }
 
     //While creating the token

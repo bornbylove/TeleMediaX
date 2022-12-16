@@ -17,9 +17,9 @@ public class UserServiceImplementation implements UserServiceInterface{
    // private RoleRepo roleRepo;
     //private  Role role;
     @Override
-    public AuthenticationRequest saveUser(AuthenticationRequest user) {
+    public void saveUser(AuthenticationRequest user) {
         log.info("Saving new role to Database");
-        return userRepo.save(user);
+        userRepo.save(user);
     }
 
    /* @Override

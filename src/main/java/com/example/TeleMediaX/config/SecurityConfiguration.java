@@ -1,4 +1,4 @@
-package com.example.TeleMediaX.config;
+/*package com.example.TeleMediaX.config;
 
 import com.example.TeleMediaX.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +15,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private UserService userService;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService);
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Excepti
         http.csrf().disable()
                 .authorizeRequests().antMatchers("/authenticate").permitAll()
                 .anyRequest().authenticated();
@@ -40,7 +43,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder(){
         return NoOpPasswordEncoder.getInstance();
     }
-}
+
+
+    @Bean
+    public UserService userServiceBean(){
+        return new UserService();
+    }
+
+}*/
 
 
 

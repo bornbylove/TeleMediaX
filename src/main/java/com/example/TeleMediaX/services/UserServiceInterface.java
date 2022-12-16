@@ -6,7 +6,7 @@ import com.example.TeleMediaX.model.AuthenticationRequest;
 import java.util.List;
 
 public interface UserServiceInterface {
-    AuthenticationRequest saveUser(AuthenticationRequest user);
+    void saveUser(AuthenticationRequest user);
     //Role saveRole(Role role);
     //void addRoleToUser(String userName, String roleName);
     AuthenticationRequest getUser(String userName);

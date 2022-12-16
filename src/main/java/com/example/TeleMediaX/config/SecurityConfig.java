@@ -1,9 +1,11 @@
 package com.example.TeleMediaX.config;
 
 import com.example.TeleMediaX.model.AuthenticationRequest;
+import com.example.TeleMediaX.repo.UserRepo;
 import com.example.TeleMediaX.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -80,6 +82,15 @@ public class SecurityConfig {
                 //System.out.println("Encoded Password::"+ encodedPassword);
                return BCrypt.checkpw(rawPassword.toString(), encodedPassword);
             }
+        };
+    }
+
+    @Bean
+    CommandLineRunner commandLineRunner(UserRepo userRepo) {
+        return args -> {
+        AuthenticationRequest User1 = userRepo.save(new AuthenticationRequest("john", "12345"));
+
+            AuthenticationRequest User2 = userRepo.save(new AuthenticationRequest("Smith", "12345"));
         };
     }
 }
