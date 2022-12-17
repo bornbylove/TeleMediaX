@@ -1,4 +1,4 @@
-package com.example.TeleMediaX.Exception;
+package com.example.TeleMediaX.exception;
 
 import org.springframework.stereotype.Service;
 

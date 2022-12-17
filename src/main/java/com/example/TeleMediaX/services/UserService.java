@@ -20,7 +20,7 @@ public class UserService implements UserDetailsService {
     @Lazy
     private SecurityConfig securityConfig;
     private UserRepo userRepo;
-    //AuthenticationRequest authenticationRequest;
+    AuthenticationRequest authenticationRequest;
 
     private UserServiceInterface userServiceInterface;
 
