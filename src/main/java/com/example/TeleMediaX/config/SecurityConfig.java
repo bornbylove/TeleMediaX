@@ -254,6 +254,7 @@ public class SecurityConfig {
 
 
     @Bean
+    @Autowired
     CommandLineRunner commandLineRunner(UserRepo userRepo) {
         return args -> {
         AuthenticationRequest User1 = userRepo.save(new AuthenticationRequest("john", "12345"));
